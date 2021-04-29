@@ -52,10 +52,10 @@ struct node {
     size_t value_size;
     uint64_t hash;
     struct node *next;
-    struct node *prev;
+    // struct node *prev;
 };
 
-static uint64_t key_hash(const uint8_t *key, size_t key_size)
+static uint32_t key_hash(const uint8_t *key, size_t key_size)
 {
     uint64_t h = 2021;
     for (int i = 0; i < key_size; i++) {
@@ -108,7 +108,8 @@ static void store()
     struct node *next = list_heads[h];
     list_heads[h] = node;
     node->next = next;
-    node->prev = NULL;
+    // node->prev = NULL;
+    puts("ok");
 }
 
 static void query()
@@ -117,10 +118,12 @@ static void query()
     size_t key_size = read_key(&key);
     struct node *n = lookup(key, key_size);
     if (n == NULL) {
-        puts("no such key");
+        puts("err");
     } else {
         value_dump(n->value, n->value_size);
+        puts("ok");
     }
+    free(key);
 }
 
 static void delete()
@@ -129,25 +132,36 @@ static void delete()
     size_t key_size = read_key(&key);
     struct node *n = lookup(key, key_size);
     if (n == NULL) {
-        puts("no such key");
+        puts("err");
     } else {
-        if (n->next != NULL) {
-            if (n->prev == NULL) {
-                list_heads[n->hash & HASH_MASK] = n->next;
-            } else {
-                n->prev->next = n->next;
-            }
+        /*
+        if (n->prev == NULL) {
+            list_heads[n->hash & HASH_MASK] = n->next;
+        } else if (n->next != NULL) {
+            n->prev->next = n->next;
+            n->next->prev = NULL;
         } else {
-            /* BUG: uaf
-            if (n->prev != NULL) {
-                n->prev->next = NULL;
+            // bug: uaf
+            // n->prev->next = NULL;
+        }
+        */
+        struct node **p = &list_heads[n->hash & HASH_MASK];
+        if (*p == n || n->next != NULL) {
+            // above condition is buggy
+            // remove `n` from the linked list
+            while (*p != n) {
+                p = &(*p)->next;
             }
-            */
+            *p = n->next;
+        } else {
+            // uaf: if `n` is at the tail of the linked list
         }
         free(n->key);
         free(n->value);
         free(n);
+        puts("ok");
     }
+    free(key);
 }
 
 int main(int argc, char** argv) {

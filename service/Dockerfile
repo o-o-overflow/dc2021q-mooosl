@@ -1,4 +1,4 @@
-from ubuntu:20.04
+from ubuntu:21.04
 
 # example:
 run apt-get -qq update && apt-get install -qq --no-install-recommends xinetd
