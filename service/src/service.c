@@ -181,9 +181,11 @@ int main(int argc, char** argv) {
                 delete();
                 break;
             case 4:
+                puts("bye");
                 exit(0);
             default:
                 puts("invalid");
+                exit(0);
         }
     }
     return 0;
