@@ -1,8 +1,13 @@
-from ubuntu:21.04
+from ubuntu:20.04
 
 # example:
-run apt-get -qq update && apt-get install -qq --no-install-recommends xinetd musl
+run apt-get -qq update && apt-get install -qq --no-install-recommends xinetd
 # python3-pip, etc.
+
+# hack for 21.04
+run apt-get install -qq --no-install-recomments gpgv2
+run sed -i 's/focal/hirsute/' /etc/apt/sources.list
+run apt-get -qq update && apt-get install musl
 
 # Note: anything that goes in public_files must be pre-built and checked in git
 copy mooosl /mooosl
