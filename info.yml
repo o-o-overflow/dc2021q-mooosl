@@ -42,7 +42,7 @@ public_files:
 # Exploit scripts must output the flag using "FLAG: <FLAG>" and exit with 0 if the flag was captured correctly. 
 # The paths are absolute in the `interaction` docker container.
 interactions:
-  - exploit.py
+  - /exploit.py
 
 
 # It's strongly suggested to have a healthcheck regex
@@ -61,7 +61,7 @@ healthcheck_tcp: awesome chall
 
 # This is the number of concurrent connections that a container should be able to handle.
 # Also see xinetd's instances parameter
-concurrent_connections: 64
+concurrent_connections: 4
 
 # Resource limits that will go in k8s
 # request_xxx is used for scheduling (overcommitting)

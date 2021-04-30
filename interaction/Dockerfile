@@ -1,12 +1,8 @@
-FROM python:3.8-alpine
+FROM ubuntu:20.04
 
-ENV TERM linux
+RUN apt-get -qq update && apt-get install -qq --no-install-recommends gcc python3-pip
 
-run apk update && apk add --no-cache netcat-openbsd bash
+RUN pip3 install pwntools
 
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
-
-COPY exploit1.py exploit2.sh /
-COPY check1.py check2.sh /
+COPY exploit.py /
 

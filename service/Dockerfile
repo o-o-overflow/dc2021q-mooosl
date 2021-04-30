@@ -5,7 +5,7 @@ run apt-get -qq update && apt-get install -qq --no-install-recommends xinetd
 # python3-pip, etc.
 
 # hack for 21.04
-run apt-get install -qq --no-install-recomments gpgv2
+run apt-get install -qq --no-install-recommends gpgv2
 run sed -i 's/focal/hirsute/' /etc/apt/sources.list
 run apt-get -qq update && apt-get install musl
 
@@ -20,7 +20,7 @@ copy service.conf /service.conf
 copy banner_fail /banner_fail
 copy wrapper /wrapper
 
-expose 5000
+expose 23333
 cmd ["/usr/sbin/xinetd", "-filelog", "/dev/stderr", "-dontfork", "-f", "/service.conf"]
 # ^^ If ps would be too revealing, replace with the line below.
 #    AFAIK, this also disables the built-in printf(%n) protection, so YMMV.
