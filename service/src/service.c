@@ -30,8 +30,8 @@ static int readint()
 static size_t read_key(uint8_t **key)
 {
     printf("key size: ");
-    uint32_t key_size = readint();
-    *key = malloc(key_size);
+    size_t key_size = readint();
+    *key = calloc(1, key_size);
     printf("key content: ");
     return recvuntil(*key, key_size);
 }
@@ -39,8 +39,8 @@ static size_t read_key(uint8_t **key)
 static size_t read_value(uint8_t **value)
 {
     printf("value size: ");
-    uint32_t value_size = readint();
-    *value = malloc(value_size);
+    size_t value_size = readint();
+    *value = calloc(1, value_size);
     printf("value content: ");
     return recvuntil(*value, value_size);
 }
@@ -99,7 +99,7 @@ static struct node *lookup(const uint8_t *key, size_t key_size)
 
 static void store()
 {
-    struct node *node = malloc(sizeof(struct node));
+    struct node *node = calloc(1, sizeof(struct node));
     node->key_size = read_key(&node->key);
     // always insert to the head, don't check duplicated entries
     node->value_size = read_value(&node->value);
