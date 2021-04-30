@@ -1,6 +1,6 @@
 # Base service info for the scoreboard ########################################
 service_name: "mooosl"
-description: "This is a template service."
+description: "check my new baby toy! (Ubuntu 21.04: apt install musl)"
 tags:
   - pwn
 authors:
@@ -8,7 +8,7 @@ authors:
 
 # Flag info
 violates_flag_format: false         # if this is not "true", the flag is verfied against the flag format
-flag: "OOO{this is a test flag}"    # change it!
+flag: "OOO{Hello! Mr. Feng Shui}"    # change it!
 copy_flag_using_build_arg: True     # Optionally: pass in THE_FLAG=(the flag above) using --build-arg (allows variable flags if desired for testing)
 
 # How players will connect to your service.
@@ -34,7 +34,6 @@ type: jeopardy
 public_files:
   - service/mooosl
   - service/libc.so
-  - service/ld-musl-x86_64.so.1
 
 
 # Test scripts are heavily encouraged.
@@ -43,6 +42,7 @@ public_files:
 # Exploit scripts must output the flag using "FLAG: <FLAG>" and exit with 0 if the flag was captured correctly. 
 # The paths are absolute in the `interaction` docker container.
 interactions:
+  - exploit.py
 
 
 # It's strongly suggested to have a healthcheck regex

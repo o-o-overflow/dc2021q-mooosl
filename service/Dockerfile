@@ -1,12 +1,11 @@
 from ubuntu:21.04
 
 # example:
-run apt-get -qq update && apt-get install -qq --no-install-recommends xinetd
+run apt-get -qq update && apt-get install -qq --no-install-recommends xinetd musl
 # python3-pip, etc.
 
 # Note: anything that goes in public_files must be pre-built and checked in git
-copy src/config.py /
-copy service /service
+copy mooosl /mooosl
 
 # If desired, the deployment tester can pass in the flag from the yaml
 ARG THE_FLAG="OOO{this is a test flag}"
