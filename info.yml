@@ -3,6 +3,10 @@ service_name: "mooosl"
 description: "check my new baby toy! (Ubuntu 21.04: apt install musl)"
 tags:
   - pwn
+  - --special-emoji-🌚
+  - --special-lat-24
+  - --special-lon-3
+
 authors:
   - slipper
 
